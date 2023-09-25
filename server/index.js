@@ -13,7 +13,14 @@ const server = require('http').Server(app);
 
 const io = require('socket.io')(server);
 
-app.use(cors());
+const corsOptions = {
+    origin: 'http://eva00.sytes.net',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
 
 app.use(morgan('dev'));
 
@@ -25,10 +32,9 @@ app.use(express.static(path.join(__dirname, '..')));
 
 app.get('/', (req, res) => {
 
-    res.status(200).send();
-
+    const indexPath = path.join(__dirname, '..', 'index.html');
+    res.sendFile(indexPath);
 });
-
 const message = [{
     id: 1,
     text: 'Bienvenid@ al chat con socket y nodejs del taller impartido por sam machado',
@@ -49,10 +55,7 @@ io.on('connection', (socket) => {  /*llamamos a socket para obtener las ropiedad
     });
 });
 
-app.get('/hi', (req, res) => {
-    const indexPath = path.join(__dirname, '..', 'index.html');
-    res.sendFile(indexPath);
-});
+
 
 server.listen(port, () => {
     console.log('Servidor en correrto funcionamiento en el puerto: ' + port);
