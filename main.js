@@ -1,6 +1,6 @@
 //vamos a hacer que el cliente su pueda conectar a nuestro servidor socket y que reconozca que alguien se a conectado.
 //en la ruta podemos buscar nuestra ip publica para así ver la apricacion fuera de nuestro dispositivo, todo equipo que este conectado a su wifi podrá ver la app.
-const socket = io.connect('http://192.168.1.35:6677', { 'forceNew': true }); /*parametro para que la conexon de fuerce: 'forceNew': true */
+const socket = io.connect('http://eva00.sytes.net', { 'forceNew': true }); /*parametro para que la conexon de fuerce: 'forceNew': true */
 
 //preparamos en la parte cliente para recoger la emision del servidor.
 socket.on('messages', (data) => { /* el parametro data recoge los datos emitidos por el servidor */

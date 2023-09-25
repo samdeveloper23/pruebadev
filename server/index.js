@@ -35,6 +35,9 @@ const message = [{
     id: 1,
     text: 'Welcome to the chat developed with nodeJS, express and socket.io, it will be used to study the performance of the server mounted on an Ubuntu-server managed from a PC dedicated to providing service, no data is saved so everything will be lost!, by samael , Web programmer. sam.developer.23@gmai.com',
     nick: 'SamDveloper-bots-EN',
+    id: 2,
+    text: 'Bienvenidos al chat desarrollado con nodeJS, express y socket.io, será utilizado para estudiar el rendimiento del servidor montadoen un ubuntu-server getionado desde un PC dedicado a dar servicio, ¡ningun dato se guarda por lo que todo se perderá!, por samael, programador web. sam.developer.23@gmai.com',
+    nick: 'SamDveloper-bots-ES',
 }];
 
 io.on('connection', (socket) => {
