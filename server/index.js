@@ -13,8 +13,6 @@ const server = require('http').Server(app);
 
 const io = require('socket.io')(server);
 
-const cors = require('cors');
-
 app.use(cors());
 
 app.use(morgan('dev'));
@@ -22,8 +20,6 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 app.use(fileUpload());
-
-app.use(express.static('..', 'client'));
 
 app.get('/', (req, res) => {
 
