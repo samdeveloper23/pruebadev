@@ -12,7 +12,6 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 
-
 const corsOptions = {
     origin: 'http://eva00.sytes.net',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
@@ -20,31 +19,26 @@ const corsOptions = {
     optionsSuccessStatus: 204,
 };
 
-io.use(cors(corsOptions));
+app.use(cors(corsOptions)); // Aplica CORS a tu aplicación Express
 
-io.use(morgan('dev'));
-
-io.use(express.json());
-
-io.use(fileUpload());
-
-io.use(express.static(path.join(__dirname, '..')));
+app.use(morgan('dev'));
+app.use(express.json());
+app.use(fileUpload());
+app.use(express.static(path.join(__dirname, '..')));
 
 app.get('/', (req, res) => {
-
     const indexPath = path.join(__dirname, '..', 'index.html');
     res.sendFile(indexPath);
 });
+
 const message = [{
     id: 1,
-    text: 'Bienvenid@ al chat con socket y nodejs del taller impartido por sam machado',
+    text: 'Bienvenid@ al chat con socket y nodejs del taller impartido por Sam Machado',
     nick: 'SamVirtual',
 }];
 
-io.on('connection', (socket) => {  /*llamamos a socket para obtener las ropiedades de sus metodos*/
-
-    console.log(`El cliente con IP: ${socket.handshake.address} se a conectato`);
-
+io.on('connection', (socket) => {
+    console.log(`El cliente con IP: ${socket.handshake.address} se ha conectado`);
     socket.emit('messages', message);
 
     socket.on('add-message', (data) => {
@@ -55,8 +49,6 @@ io.on('connection', (socket) => {  /*llamamos a socket para obtener las ropiedad
     });
 });
 
-
-
 server.listen(port, () => {
-    console.log(`Servidor en correrto funcionamiento en el puerto: ${port}`.america);
-})
+    console.log(`Servidor en funcionamiento en el puerto: ${port}`);
+});
