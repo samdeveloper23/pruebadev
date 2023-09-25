@@ -21,7 +21,7 @@ app.use(express.json());
 
 app.use(fileUpload());
 
-app.use(express.static(path.join(__dirname, '..', 'client')));
+app.use(express.static(path.join(__dirname, '..')));
 
 app.get('/', (req, res) => {
 
@@ -50,7 +50,7 @@ io.on('connection', (socket) => {  /*llamamos a socket para obtener las ropiedad
 });
 
 app.get('/hi', (req, res) => {
-    const indexPath = path.join(__dirname, '..', 'client', 'index.html');
+    const indexPath = path.join(__dirname, '..', 'index.html');
     res.sendFile(indexPath);
 });
 
