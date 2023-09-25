@@ -21,6 +21,8 @@ app.use(express.json());
 
 app.use(fileUpload());
 
+app.use(express.static(path.join(__dirname, '..', 'client')));
+
 app.get('/', (req, res) => {
 
     res.status(200).send();
@@ -48,8 +50,8 @@ io.on('connection', (socket) => {  /*llamamos a socket para obtener las ropiedad
 });
 
 app.get('/hi', (req, res) => {
-    const filePath = express.static(path.join(__dirname, '..', 'client'));
-    res.sendFile(filePath);
+    const indexPath = path.join(__dirname, '..', 'client', 'index.html');
+    res.sendFile(indexPath);
 });
 
 server.listen(port, () => {
