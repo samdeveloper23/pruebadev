@@ -1,34 +1,34 @@
-const morgan = require('morgan');
+const http = require('http');
 const express = require('express');
+const socketIo = require('socket.io');
+const morgan = require('morgan');
 const colors = require('colors');
 const fileUpload = require('express-fileupload');
 const cors = require('cors');
 const path = require('path');
 const port = 6677;
 
-
 const app = express();
+const server = http.createServer(app);
+const io = socketIo(server);
 
-const server = require('http').Server(app);
-
-const io = require('socket.io')(server);
 
 const corsOptions = {
     origin: 'http://eva00.sytes.net',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
+    credentials: false,
     optionsSuccessStatus: 204,
 };
 
-app.use(cors(corsOptions));
+io.use(cors(corsOptions));
 
-app.use(morgan('dev'));
+io.use(morgan('dev'));
 
-app.use(express.json());
+io.use(express.json());
 
-app.use(fileUpload());
+io.use(fileUpload());
 
-app.use(express.static(path.join(__dirname, '..')));
+io.use(express.static(path.join(__dirname, '..')));
 
 app.get('/', (req, res) => {
 
@@ -58,5 +58,5 @@ io.on('connection', (socket) => {  /*llamamos a socket para obtener las ropiedad
 
 
 server.listen(port, () => {
-    console.log('Servidor en correrto funcionamiento en el puerto: ' + port);
+    console.log(`Servidor en correrto funcionamiento en el puerto: ${port}`.america);
 })
