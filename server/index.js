@@ -48,7 +48,7 @@ io.on('connection', (socket) => {  /*llamamos a socket para obtener las ropiedad
 });
 
 app.get('/hi', (req, res) => {
-    const filePath = express.static(path.join(__dirname, 'public'));
+    const filePath = express.static(path.join(__dirname, '..', 'client'));
     res.sendFile(filePath);
 });
 
